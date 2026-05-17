@@ -6,7 +6,7 @@ import {
   configWrite,
   configGetDesc
 } from '../config.js';
-import '../style/ui.css';
+import uiCss from '../style/ui.css';
 import { APP_VERSION } from '../constants/global.constants.js';
 import {
   configOptions,
@@ -486,6 +486,10 @@ export function showNotification(text, time = 7000, type = 'success') {
  * Listens for changes to the DISABLE_ANIMATIONS config and updates the style accordingly.
  */
 function initRemoveAnimations() {
+  const uiStyle = document.createElement('style');
+  uiStyle.textContent = uiCss;
+  document.head.appendChild(uiStyle);
+
   const style = document.createElement('style');
   document.head.appendChild(style);
 
@@ -562,8 +566,8 @@ function handleAdsAndConsentModals() {
 
 function initKeyListeners() {
   document.addEventListener('keydown', eventHandler, true);
-  document.addEventListener('keypress', eventHandler, true);
-  document.addEventListener('keyup', eventHandler, true);
+  // document.addEventListener('keypress', eventHandler, true);
+  // document.addEventListener('keyup', eventHandler, true);
 }
 
 function initChatOverlay() {
